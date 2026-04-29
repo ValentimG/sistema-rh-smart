@@ -1,0 +1,98 @@
+/* ═══════════════════════════════════════════════
+   SMART RH — Tema global: dark mode + animações
+   ═══════════════════════════════════════════════ */
+
+/* ── Dark mode ─────────────────────────────────── */
+html.dark body                         { background:#0f172a!important;color:#f1f5f9 }
+html.dark .main                        { background:#0f172a }
+html.dark .top                         { background:#1e293b!important;border-color:#334155!important }
+html.dark .top-l,html.dark .top-nm    { color:#f1f5f9!important }
+html.dark .top-s                       { color:#94a3b8!important }
+
+/* cards / seções */
+html.dark .card,html.dark .fc,html.dark .sec,
+html.dark .stat,html.dark .profile-card,
+html.dark .tab-panel                   { background:#1e293b!important;border-color:#334155!important }
+
+/* abas */
+html.dark .tab-btn                     { background:#111827!important;border-color:#334155!important;color:#64748b!important }
+html.dark .tab-btn.act                 { background:#1e293b!important;color:#818cf8!important;border-color:#4f46e5!important;border-bottom-color:#1e293b!important }
+
+/* cabeçalhos de card */
+html.dark .fh,html.dark .ch,html.dark .sec-h
+                                       { background:#111827!important;border-color:#334155!important;color:#94a3b8!important }
+
+/* campos */
+html.dark .fd                          { border-color:#1e293b!important }
+html.dark .fl                          { color:#64748b!important }
+html.dark .fv                          { color:#f1f5f9!important }
+html.dark label                        { color:#cbd5e1!important }
+html.dark .inp                         { background:#0f172a!important;border-color:#334155!important;color:#f1f5f9!important }
+html.dark .inp:focus                   { border-color:#6366f1!important;box-shadow:0 0 0 3px rgba(99,102,241,.15)!important }
+html.dark .inp-ro                      { background:#111827!important;color:#64748b!important }
+html.dark .hint,html.dark .fv.em      { color:#64748b!important }
+
+/* tabelas */
+html.dark table thead th               { background:#111827!important;color:#94a3b8!important;border-color:#334155!important }
+html.dark table tbody td               { color:#cbd5e1!important;border-color:#1e293b!important }
+html.dark table tbody tr:nth-child(even){ background:#162032 }
+html.dark table tbody tr:hover         { background:#1e2d40!important }
+
+/* botões */
+html.dark .btn-s                       { background:#1e293b!important;color:#cbd5e1!important;border-color:#334155!important }
+html.dark .btn-s:hover                 { background:#2d3f55!important }
+
+/* texto */
+html.dark .fn,.dark .func-name,
+html.dark .pname                       { color:#f1f5f9!important }
+html.dark .func-cargo,html.dark .pcargo{ color:#64748b!important }
+
+/* stats */
+html.dark .stat-lbl                    { color:#94a3b8!important }
+html.dark .stat-sub                    { color:#64748b!important }
+html.dark .stat-bar                    { background:#0f172a!important }
+
+/* filtros / upload / misc */
+html.dark .filter-btn                  { background:#1e293b!important;color:#94a3b8!important;border-color:#334155!important }
+html.dark .filter-btn:hover            { color:#818cf8!important;border-color:#818cf8!important }
+html.dark .filter-btn.on              { background:#4f46e5!important;color:#fff!important;border-color:#4f46e5!important }
+html.dark .upload-area                 { border-color:#334155!important }
+html.dark .upload-area:hover           { background:#1a2440!important }
+html.dark .file-prev                   { background:#111827!important;border-color:#334155!important }
+html.dark .pg-wrap                     { border-color:#334155!important }
+html.dark .empty                       { color:#64748b!important }
+html.dark .chk-item                    { border-color:#334155!important }
+html.dark .chk-item:hover              { background:#243447!important;border-color:#4f46e5!important }
+html.dark .vh-box                      { background:#064e3b!important;border-color:#065f46!important }
+
+/* ── Animações de micro-interação ───────────────── */
+.card,.fc,.sec,.stat,.profile-card     { transition:box-shadow .2s,transform .2s }
+.card:hover,.stat:hover                { box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-1px) }
+
+.btn,.btn-sm                           { transition:all .18s }
+.btn-p:hover                           { box-shadow:0 4px 12px rgba(79,70,229,.4) }
+
+table tbody tr                         { transition:background .12s }
+
+.sb-lnk                                { transition:background .15s,color .15s,border-left-color .15s,padding-left .15s }
+.sb-lnk:hover                          { padding-left:16px }
+
+/* Toast de feedback deslizante */
+@keyframes rh-slide-in {
+    from { opacity:0;transform:translateX(60px) }
+    to   { opacity:1;transform:translateX(0) }
+}
+.rh-toast { animation:rh-slide-in .3s ease-out }
+
+/* ── Botão flutuante de dark mode ───────────────── */
+#rh-dark-btn {
+    position:fixed;bottom:24px;right:24px;
+    width:42px;height:42px;border-radius:50%;
+    background:#fff;border:1px solid #e5e7eb;
+    box-shadow:0 4px 14px rgba(0,0,0,.12);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    z-index:9999;transition:all .2s;
+}
+html.dark #rh-dark-btn { background:#1e293b;border-color:#334155;box-shadow:0 4px 14px rgba(0,0,0,.4) }
+#rh-dark-btn:hover      { transform:scale(1.1) }
+#rh-dark-btn svg        { pointer-events:none }
