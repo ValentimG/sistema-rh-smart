@@ -1,32 +1,66 @@
-﻿<x-app-layout>
-    <x-slot name="header">
-        <div style="display:flex;align-items:center;gap:10px;">
-            <div style="width:32px;height:32px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.72rem;">RH</div>
-            <div>
-                <div style="font-size:.9rem;font-weight:700;color:#111827;">SMART RH</div>
-                <div style="font-size:.58rem;color:#9ca3af;font-weight:500;">MEU PERFIL</div>
-            </div>
-        </div>
-    </x-slot>
-
-    <div style="background:#f8f9fa;min-height:100vh;padding:30px 0;">
-        <div style="max-width:600px;margin:0 auto;padding:0 20px;">
-
-            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:24px;margin-bottom:20px;">
-                <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:16px;">Informações do Perfil</h3>
-                @include('profile.partials.update-profile-information-form')
-            </div>
-
-            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:24px;margin-bottom:20px;">
-                <h3 style="font-size:1rem;font-weight:600;color:#111827;margin-bottom:16px;">Alterar Senha</h3>
-                @include('profile.partials.update-password-form')
-            </div>
-
-            <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:24px;">
-                <h3 style="font-size:1rem;font-weight:600;color:#dc2626;margin-bottom:16px;">Excluir Conta</h3>
-                @include('profile.partials.delete-user-form')
-            </div>
-
-        </div>
-    </div>
-</x-app-layout>
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>Meu Perfil — SMART RH</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
+body{background:#f8f9fa;color:#111827;min-height:100vh}
+.hd{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ic{width:32px;height:32px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.72rem}
+.logo-n{font-size:.9rem;font-weight:700;color:#111827}.logo-s{font-size:.58rem;color:#9ca3af;font-weight:500}
+.hd-r{display:flex;align-items:center;gap:10px}
+.nav{display:flex;gap:2px}
+.nl{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:7px;color:#6b7280;text-decoration:none;font-size:.8rem;font-weight:500;transition:.15s}
+.nl:hover,.nl.on{background:#eff6ff;color:#2563eb}
+.av{width:34px;height:34px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0}
+.lg-btn{display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:7px;color:#9ca3af;font-size:.8rem;font-weight:500;background:none;border:none;cursor:pointer;transition:.15s}
+.lg-btn:hover{background:#f3f4f6;color:#374151}
+.pg{max-width:600px;margin:0 auto;padding:40px 24px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:24px;margin-bottom:20px}
+.card-tt{font-size:1rem;font-weight:600;color:#111827;margin-bottom:16px}
+.btn-p{display:inline-flex;padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:7px;font-weight:600;font-size:.87rem;cursor:pointer;text-decoration:none;transition:.2s}
+.btn-p:hover{background:#1d4ed8}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:.8rem;font-weight:600;color:#374151;margin-bottom:5px}
+.form-input{width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:7px;font-size:.9rem;outline:none}
+.form-input:focus{border-color:#2563eb}
+.alert{padding:12px 16px;border-radius:8px;font-size:.82rem;font-weight:500;margin-bottom:18px}
+.alert-ok{background:#dcfce7;color:#065f46;border:1px solid #a7f3d0}
+.btn-del{display:inline-flex;padding:10px 24px;background:#dc2626;color:#fff;border:none;border-radius:7px;font-weight:600;font-size:.87rem;cursor:pointer}
+.btn-del:hover{background:#b91c1c}
+</style>
+</head>
+<body>
+@php $navFunc = Auth::user()->funcionario ?? null; @endphp
+<header class="hd">
+  <div class="logo">
+    <div class="logo-ic">RH</div>
+    <div><div class="logo-n">SMART RH</div><div class="logo-s">MEU PERFIL</div></div>
+  </div>
+  <div class="hd-r">
+    <nav class="nav">
+      @if($navFunc && $navFunc->isGestor())
+      <a href="{{ route('gestor.dashboard') }}" class="nl">Dashboard</a>
+      <a href="{{ route('funcionarios.index') }}" class="nl">Funcionarios</a>
+      @else
+      <a href="{{ route('ponto.index') }}" class="nl">Meu Ponto</a>
+      @endif
+      <a href="{{ route('atestados.index') }}" class="nl">Atestados</a>
+    </nav>
+    <div class="av">{{ strtoupper(substr(Auth::user()->name,0,1)) }}</div>
+    <form method="POST" action="{{ route('logout') }}">@csrf
+      <button type="submit" class="lg-btn">Sair</button>
+    </form>
+  </div>
+</header>
+<main class="pg">
+  @include('profile.partials.update-profile-information-form')
+  @include('profile.partials.update-password-form')
+  @include('profile.partials.delete-user-form')
+</main>
+</body>
+</html>
