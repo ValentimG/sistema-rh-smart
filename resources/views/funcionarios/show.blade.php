@@ -14,7 +14,7 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
 .hd-r{display:flex;align-items:center;gap:10px}
 .nav{display:flex;gap:2px}
 .nl{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:7px;color:#6b7280;text-decoration:none;font-size:.8rem;font-weight:500;transition:.15s;white-space:nowrap}
-.nl:hover,.nl.on{background:#eff6ff;color:#2563eb}
+.nl:hover,.nl.on{background:#eff6ff;color:#2563eb}a
 .nl svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .av{width:34px;height:34px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0}
 .lg-btn{display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:7px;color:#9ca3af;font-size:.8rem;font-weight:500;background:none;border:none;cursor:pointer;transition:.15s}
