@@ -7,10 +7,7 @@
     <title>{{ config('app.name', 'SMART RH') }} — Login</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234f46e5'/><text x='4' y='23' fill='white' font-family='system-ui' font-weight='800' font-size='15'>RH</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/rh-theme.css">
-    <script>if(localStorage.getItem('rhDark')==='1')document.documentElement.classList.add('dark')</script>
-    <script src="/rh.js" defer></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+ 
     <style>
     *{font-family:'Inter',sans-serif;box-sizing:border-box;margin:0;padding:0}
     body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow-y:auto;background:#0f172a}
