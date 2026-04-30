@@ -14,7 +14,7 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
 .hd-r{display:flex;align-items:center;gap:10px}
 .nav{display:flex;gap:2px}
 .nl{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:7px;color:#6b7280;text-decoration:none;font-size:.8rem;font-weight:500;transition:.15s;white-space:nowrap}
-.nl:hover,.nl.on{background:#eff6ff;color:#2563eb}a
+.nl:hover,.nl.on{background:#eff6ff;color:#2563eb}
 .nl svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .av{width:34px;height:34px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0}
 .lg-btn{display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:7px;color:#9ca3af;font-size:.8rem;font-weight:500;background:none;border:none;cursor:pointer;transition:.15s}
@@ -43,7 +43,6 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
 .fv-hi{color:#059669;font-weight:700}.fv-em{color:#9ca3af;font-style:italic}.fv-mono{font-variant-numeric:tabular-nums}
 .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
 .tag{background:#eff6ff;color:#2563eb;padding:2px 8px;border-radius:999px;font-size:.68rem;font-weight:600}
-/* Tabs */
 .tabs-wrap{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:0}
 .tabs{display:flex;gap:2px}
 .tab-btn{padding:9px 16px;border:1px solid #e5e7eb;border-bottom:none;border-radius:8px 8px 0 0;font-size:.8rem;font-weight:600;color:#6b7280;background:#f9fafb;cursor:pointer;transition:.15s}
@@ -162,9 +161,7 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
   <!-- Abas -->
   <div class="tabs-wrap">
     <div class="tabs">
-      <button class="tab-btn act" onclick="showTab('atestados',this)">
-        Atestados@if($funcionario->atestadosPendentes()->count() > 0)<span style="background:#f59e0b;color:#fff;border-radius:999px;padding:1px 7px;font-size:.63rem;margin-left:5px">{{ $funcionario->atestadosPendentes()->count() }}</span>@endif
-      </button>
+      <button class="tab-btn act" onclick="showTab('atestados',this)">Atestados @if($funcionario->atestadosPendentes()->count() > 0)<span style="background:#f59e0b;color:#fff;border-radius:999px;padding:1px 7px;font-size:.63rem;margin-left:5px">{{ $funcionario->atestadosPendentes()->count() }}</span>@endif</button>
       <button class="tab-btn" onclick="showTab('cargos',this)">Historico de Cargos</button>
       <button class="tab-btn" onclick="showTab('afastamentos',this)">Afastamentos</button>
     </div>
