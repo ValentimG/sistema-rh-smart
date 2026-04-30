@@ -23,7 +23,6 @@ class AtestadoController extends Controller
 
         $query = Atestado::with('funcionario')->orderByDesc('data_inicio');
 
-        // Gestor vê todos; funcionário vê apenas os próprios
         if (! $atual->isGestor()) {
             $query->where('funcionario_id', $atual->id);
         }
@@ -54,14 +53,16 @@ class AtestadoController extends Controller
         $validated = $request->validate([
             'funcionario_id' => ['required', 'exists:funcionarios,id'],
             'tipo'           => ['required', 'in:medico,odontologico,acompanhamento,outros'],
-            'data_inicio'    => ['required', 'date'],
-            'data_fim'       => ['required', 'date', 'gte:data_inicio'],
+            'data_inicio'    => ['required', 'date', 'before_or_equal:today'],
+            'data_fim'       => ['required', 'date', 'after_or_equal:data_inicio', 'before_or_equal:today'],
             'cobre_horas'    => ['nullable', 'boolean'],
             'observacao'     => ['nullable', 'string', 'max:1000'],
             'arquivo'        => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:2048'],
+        ], [
+            'data_inicio.before_or_equal' => 'A data de início não pode ser futura.',
+            'data_fim.before_or_equal' => 'A data final não pode ser futura.',
         ]);
 
-        // Funcionário só pode registrar para si mesmo
         if (! $atual->isGestor()) {
             $validated['funcionario_id'] = $atual->id;
         }
