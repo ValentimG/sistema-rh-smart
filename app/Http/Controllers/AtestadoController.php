@@ -54,13 +54,13 @@ class AtestadoController extends Controller
             'funcionario_id' => ['required', 'exists:funcionarios,id'],
             'tipo'           => ['required', 'in:medico,odontologico,acompanhamento,outros'],
             'data_inicio'    => ['required', 'date', 'before_or_equal:today'],
-            'data_fim'       => ['required', 'date', 'after_or_equal:data_inicio', 'before_or_equal:today'],
+            'data_fim'       => ['required', 'date', 'after_or_equal:data_inicio'],
             'cobre_horas'    => ['nullable', 'boolean'],
             'observacao'     => ['nullable', 'string', 'max:1000'],
             'arquivo'        => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:2048'],
         ], [
             'data_inicio.before_or_equal' => 'A data de início não pode ser futura.',
-            'data_fim.before_or_equal' => 'A data final não pode ser futura.',
+            'data_fim.after_or_equal' => 'A data final deve ser igual ou posterior à data de início.',
         ]);
 
         if (! $atual->isGestor()) {
