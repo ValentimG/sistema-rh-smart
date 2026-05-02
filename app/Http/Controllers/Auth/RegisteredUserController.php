@@ -36,13 +36,12 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Criar vinculacao basica com funcionario (dados minimos)
         Funcionario::create([
             'user_id' => $user->id,
             'nome' => $request->name,
             'email' => $request->email,
-            'cpf' => '',
-            'endereco' => '',
+            'cpf' => '000.000.000-' . str_pad($user->id, 2, '0', STR_PAD_LEFT),
+            'endereco' => 'A DEFINIR',
             'cargo' => $request->tipo === 'gestor' ? 'Gestor' : 'A definir',
             'data_admissao' => now(),
             'tipo' => $request->tipo,
@@ -52,7 +51,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // Se for funcionario, redireciona para completar perfil
         if ($request->tipo === 'funcionario') {
             return redirect()->route('perfil.completar');
         }

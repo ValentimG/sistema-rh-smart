@@ -35,10 +35,10 @@ class FuncionarioController extends Controller
             'tipo'                        => ['required', 'in:funcionario,gestor'],
             'salario_base'                => ['nullable', 'numeric', 'min:0'],
             'carga_horaria_mensal'        => ['nullable', 'integer', 'min:1'],
-            'data_nascimento'             => ['nullable', 'date', 'before_or_equal:today'],
+            'data_nascimento'             => ['nullable', 'date', 'before_or_equal:' . now()->subYears(14)->format('Y-m-d')],
             'sexo'                        => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil'                => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
-            'telefone'                    => ['nullable', 'string', 'max:20'],
+            'telefone'                    => ['nullable', 'string', 'min:14', 'max:15'],
             'foto'                        => ['nullable', 'image', 'max:2048'],
             'tipo_contrato'               => ['nullable', 'in:clt,pj,estagio,temporario,terceirizado'],
             'beneficios'                  => ['nullable', 'array'],
@@ -47,6 +47,9 @@ class FuncionarioController extends Controller
             'exame_admissional_resultado' => ['nullable', 'string', 'max:255'],
             'exame_demissional_data'      => ['nullable', 'date', 'before_or_equal:today'],
             'exame_demissional_resultado' => ['nullable', 'string', 'max:255'],
+        ], [
+            'data_nascimento.before_or_equal' => 'Voce deve ter pelo menos 14 anos.',
+            'telefone.min' => 'Digite o telefone no formato (XX) XXXXX-XXXX.',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -62,13 +65,7 @@ class FuncionarioController extends Controller
     public function show(Funcionario $funcionario): View
     {
         $mesesTrabalhados = $funcionario->data_admissao->diffInMonths(now());
-
-        $funcionario->load([
-            'atestados'             => fn ($q) => $q->orderByDesc('data_inicio'),
-            'historicoCargos',
-            'historicoAfastamentos',
-        ]);
-
+        $funcionario->load(['atestados' => fn ($q) => $q->orderByDesc('data_inicio'), 'historicoCargos', 'historicoAfastamentos']);
         return view('funcionarios.show', compact('funcionario', 'mesesTrabalhados'));
     }
 
@@ -89,10 +86,10 @@ class FuncionarioController extends Controller
             'tipo'                        => ['required', 'in:funcionario,gestor'],
             'salario_base'                => ['nullable', 'numeric', 'min:0'],
             'carga_horaria_mensal'        => ['nullable', 'integer', 'min:1'],
-            'data_nascimento'             => ['nullable', 'date', 'before_or_equal:today'],
+            'data_nascimento'             => ['nullable', 'date', 'before_or_equal:' . now()->subYears(14)->format('Y-m-d')],
             'sexo'                        => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil'                => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
-            'telefone'                    => ['nullable', 'string', 'max:20'],
+            'telefone'                    => ['nullable', 'string', 'min:14', 'max:15'],
             'foto'                        => ['nullable', 'image', 'max:2048'],
             'tipo_contrato'               => ['nullable', 'in:clt,pj,estagio,temporario,terceirizado'],
             'beneficios'                  => ['nullable', 'array'],
@@ -101,6 +98,9 @@ class FuncionarioController extends Controller
             'exame_admissional_resultado' => ['nullable', 'string', 'max:255'],
             'exame_demissional_data'      => ['nullable', 'date', 'before_or_equal:today'],
             'exame_demissional_resultado' => ['nullable', 'string', 'max:255'],
+        ], [
+            'data_nascimento.before_or_equal' => 'Voce deve ter pelo menos 14 anos.',
+            'telefone.min' => 'Digite o telefone no formato (XX) XXXXX-XXXX.',
         ]);
 
         if ($request->hasFile('foto')) {
@@ -121,11 +121,8 @@ class FuncionarioController extends Controller
         if ($funcionario->foto) {
             \Illuminate\Support\Facades\Storage::disk('public')->delete($funcionario->foto);
         }
-
         $funcionario->delete();
-
-        return redirect()->route('funcionarios.index')
-            ->with('success', 'Funcionário removido.');
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionário removido.');
     }
 
     public function completarPerfil(): View
@@ -141,13 +138,16 @@ class FuncionarioController extends Controller
         abort_if(!$funcionario, 403);
 
         $validated = $request->validate([
-            'cpf' => ['required', 'string', 'min:11', 'max:14', "unique:funcionarios,cpf,{$funcionario->id}"],
+            'cpf' => ['required', 'string', 'min:14', 'max:14', "unique:funcionarios,cpf,{$funcionario->id}"],
             'endereco' => ['required', 'string', 'max:255'],
-            'data_nascimento' => ['nullable', 'date', 'before_or_equal:today'],
+            'data_nascimento' => ['nullable', 'date', 'before_or_equal:' . now()->subYears(14)->format('Y-m-d')],
             'sexo' => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil' => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
-            'telefone' => ['nullable', 'string', 'max:20'],
+            'telefone' => ['nullable', 'string', 'min:14', 'max:15'],
             'cargo' => ['required', 'string', 'max:255'],
+        ], [
+            'data_nascimento.before_or_equal' => 'Voce deve ter pelo menos 14 anos.',
+            'telefone.min' => 'Digite o telefone no formato (XX) XXXXX-XXXX.',
         ]);
 
         $funcionario->update($validated);
