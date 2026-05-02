@@ -1,0 +1,56 @@
+/* Calendario - SMART RH */
+.cal-layout { display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start; }
+.cal-sidebar .card { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); margin-bottom: 16px; }
+.cal-main .card { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+.card-title { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--gray-400); margin-bottom: 14px; }
+.legend-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: .8rem; color: var(--gray-600); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.ld-feriado { background: var(--danger); } .ld-empresa { background: var(--primary); } .ld-pessoal { background: var(--success); }
+.btn-add { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; background: linear-gradient(135deg, var(--primary), #6366f1); color: #fff; border: none; border-radius: 12px; font-size: .82rem; font-weight: 600; cursor: pointer; transition: all .3s; box-shadow: 0 4px 12px rgba(37,99,235,.25); width: 100%; justify-content: center; }
+.btn-add:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,.35); }
+.evento-mini { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; margin-bottom: 6px; font-size: .78rem; transition: all .2s; cursor: pointer; }
+.evento-mini:hover { background: var(--gray-50); }
+.evento-mini-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.evento-mini-titulo { font-weight: 500; color: var(--gray-800); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.evento-mini-data { font-size: .7rem; color: var(--gray-400); }
+.fc-theme-standard td, .fc-theme-standard th { border-color: var(--gray-100); }
+.fc .fc-toolbar-title { font-size: 1.1rem; font-weight: 700; color: var(--gray-900); }
+.fc .fc-button { background: #fff; border: 1px solid var(--gray-200); color: var(--gray-600); border-radius: 10px; padding: 7px 14px; font-size: .8rem; font-weight: 600; text-transform: capitalize; transition: all .2s; }
+.fc .fc-button:hover { background: var(--gray-50); border-color: var(--primary); color: var(--primary); }
+.fc .fc-button-primary:not(:disabled).fc-button-active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.fc .fc-daygrid-day.fc-day-today { background: rgba(37,99,235,.03); }
+.fc .fc-daygrid-day-number { font-size: .8rem; font-weight: 500; color: var(--gray-800); padding: 8px 10px; }
+.fc .fc-col-header-cell-cushion { font-size: .72rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: .5px; padding: 10px 0; }
+.fc .fc-daygrid-event { border-radius: 6px; padding: 3px 8px; font-size: .72rem; font-weight: 500; border: none; margin: 1px 4px; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); backdrop-filter: blur(4px); z-index: 200; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal-box { background: #fff; border-radius: 20px; padding: 32px; width: 420px; box-shadow: 0 25px 80px rgba(0,0,0,.25); animation: modalPop .3s ease-out; }
+@keyframes modalPop { from { opacity: 0; transform: scale(.9) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.modal-box h3 { font-size: 1.1rem; font-weight: 700; color: var(--gray-900); margin-bottom: 20px; }
+.form-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--gray-200); border-radius: 12px; font-size: .87rem; outline: none; margin-bottom: 14px; transition: all .2s; background: var(--gray-50); }
+.form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,.08); background: #fff; }
+.btn { padding: 10px 20px; border-radius: 12px; font-size: .84rem; font-weight: 600; cursor: pointer; border: none; transition: all .2s; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), #6366f1); color: #fff; }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.3); }
+.btn-ghost { background: transparent; color: var(--gray-600); }
+.btn-ghost:hover { background: var(--gray-100); }
+.btn-danger { background: #fee2e2; color: var(--danger); }
+.btn-danger:hover { background: #fecaca; }
+/* Dark */
+body.dark .cal-sidebar .card, body.dark .cal-main .card { background: rgba(30,41,59,.8); border-color: rgba(255,255,255,.05); }
+body.dark .card-title { color: #64748b; }
+body.dark .legend-item { color: #94a3b8; }
+body.dark .evento-mini:hover { background: rgba(255,255,255,.03); }
+body.dark .evento-mini-titulo { color: #e2e8f0; }
+body.dark .fc .fc-toolbar-title { color: #f1f5f9; }
+body.dark .fc .fc-button { background: #1e293b; border-color: #334155; color: #94a3b8; }
+body.dark .fc .fc-button:hover { background: #334155; color: #e2e8f0; }
+body.dark .fc .fc-daygrid-day-number { color: #94a3b8; }
+body.dark .fc .fc-col-header-cell-cushion { color: #64748b; }
+body.dark .fc .fc-daygrid-day.fc-day-today { background: rgba(37,99,235,.06); }
+body.dark .modal-box { background: #1e293b; }
+body.dark .modal-box h3 { color: #f1f5f9; }
+body.dark .form-input { background: #0f172a; border-color: #334155; color: #e2e8f0; }
+body.dark .form-input:focus { background: #0f172a; }
+body.dark .btn-ghost { color: #94a3b8; }
+body.dark .btn-ghost:hover { background: rgba(255,255,255,.05); }
