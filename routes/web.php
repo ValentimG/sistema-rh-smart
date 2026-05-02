@@ -36,10 +36,14 @@ Route::middleware('auth')->group(function () {
         ->middleware('gestor')
         ->name('gestor.exportar-csv');
 
-    // Atestados: acessível para qualquer usuário autenticado (filtragem por role feita no controller)
+    // Atestados
     Route::resource('atestados', AtestadoController::class)->except(['edit', 'update']);
     Route::post('atestados/{atestado}/aprovar',  [AtestadoController::class, 'aprovar'])->name('atestados.aprovar');
     Route::post('atestados/{atestado}/reprovar', [AtestadoController::class, 'reprovar'])->name('atestados.reprovar');
+
+    // Completar perfil apos registro
+    Route::get('/completar-perfil', [FuncionarioController::class, 'completarPerfil'])->name('perfil.completar');
+    Route::post('/completar-perfil', [FuncionarioController::class, 'salvarPerfil'])->name('perfil.salvar');
 });
 
 require __DIR__.'/auth.php';

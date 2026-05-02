@@ -36,26 +36,27 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Criar vínculo com funcionario automaticamente
+        // Criar vinculacao basica com funcionario (dados minimos)
         Funcionario::create([
-    'user_id' => $user->id,
-    'nome' => $request->name,
-    'email' => $request->email,
-    'cpf' => '000.000.000-00',
-    'endereco' => 'A DEFINIR',
-    'cargo' => $request->tipo === 'gestor' ? 'Gestor' : 'Funcionário',
-    'data_admissao' => now(),
-    'tipo' => $request->tipo,
-]);
+            'user_id' => $user->id,
+            'nome' => $request->name,
+            'email' => $request->email,
+            'cpf' => '',
+            'endereco' => '',
+            'cargo' => $request->tipo === 'gestor' ? 'Gestor' : 'A definir',
+            'data_admissao' => now(),
+            'tipo' => $request->tipo,
+        ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        // Redirecionar conforme o tipo
-        if ($request->tipo === 'gestor') {
-            return redirect()->route('gestor.dashboard');
+        // Se for funcionario, redireciona para completar perfil
+        if ($request->tipo === 'funcionario') {
+            return redirect()->route('perfil.completar');
         }
-        return redirect()->route('ponto.index');
+
+        return redirect()->route('gestor.dashboard');
     }
 }
