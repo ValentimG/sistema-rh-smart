@@ -110,4 +110,31 @@ class FuncionarioController extends Controller
         return redirect()->route('funcionarios.index')
             ->with('success', 'Funcionário removido.');
     }
+
+    public function completarPerfil(): View
+    {
+        $funcionario = Funcionario::where('user_id', auth()->id())->first();
+        abort_if(!$funcionario || $funcionario->isGestor(), 403);
+        return view('funcionarios.completar', compact('funcionario'));
+    }
+
+    public function salvarPerfil(Request $request): RedirectResponse
+    {
+        $funcionario = Funcionario::where('user_id', auth()->id())->first();
+        abort_if(!$funcionario, 403);
+
+        $validated = $request->validate([
+            'cpf' => ['required', 'string', 'min:11', 'max:14', "unique:funcionarios,cpf,{$funcionario->id}"],
+            'endereco' => ['required', 'string', 'max:255'],
+            'data_nascimento' => ['nullable', 'date', 'before_or_equal:today'],
+            'sexo' => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
+            'estado_civil' => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
+            'telefone' => ['nullable', 'string', 'max:20'],
+            'cargo' => ['required', 'string', 'max:255'],
+        ]);
+
+        $funcionario->update($validated);
+
+        return redirect()->route('ponto.index')->with('success', 'Perfil atualizado com sucesso!');
+    }
 }
