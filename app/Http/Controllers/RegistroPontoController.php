@@ -244,4 +244,37 @@ class RegistroPontoController extends Controller
 
         return $response;
     }
+
+    public function extratoBancoHoras(): View
+    {
+        $funcionario = $this->funcionarioLogado();
+
+        $registros = RegistroPonto::where('funcionario_id', $funcionario->id)
+            ->whereNotNull('saida')
+            ->whereDate('data', '>=', now()->subDays(90))
+            ->orderByDesc('data')
+            ->get();
+
+        $labels = $registros->pluck('data')->map(fn($d) => $d->format('d/m'))->reverse()->values()->toArray();
+        $horas = $registros->map(fn($r) => round($r->horasTrabalhadas(), 2))->reverse()->values()->toArray();
+
+        $saldos = [];
+        $saldoAcumulado = (float) $funcionario->banco_horas;
+
+        foreach ($horas as $h) {
+            $saldoAcumulado -= ($h - 8);
+            $saldos[] = round($saldoAcumulado, 2);
+        }
+
+        $saldoAtual = (float) $funcionario->banco_horas;
+
+        return view('registros.extrato', compact(
+            'funcionario',
+            'registros',
+            'saldoAtual',
+            'labels',
+            'horas',
+            'saldos'
+        ));
+    }
 }
