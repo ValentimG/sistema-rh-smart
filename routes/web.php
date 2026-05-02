@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AtestadoController;
 use App\Http\Controllers\CalendarioController;
+use App\Http\Controllers\FeriasController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistroPontoController;
@@ -44,20 +45,21 @@ Route::middleware('auth')->group(function () {
         ->middleware('gestor')
         ->name('gestor.exportar-csv');
 
-    // Atestados
     Route::resource('atestados', AtestadoController::class)->except(['edit', 'update']);
-    Route::post('atestados/{atestado}/aprovar',  [AtestadoController::class, 'aprovar'])->name('atestados.aprovar');
+    Route::post('atestados/{atestado}/aprovar', [AtestadoController::class, 'aprovar'])->name('atestados.aprovar');
     Route::post('atestados/{atestado}/reprovar', [AtestadoController::class, 'reprovar'])->name('atestados.reprovar');
 
-    // Completar perfil apos registro
     Route::get('/completar-perfil', [FuncionarioController::class, 'completarPerfil'])->name('perfil.completar');
     Route::post('/completar-perfil', [FuncionarioController::class, 'salvarPerfil'])->name('perfil.salvar');
 
-    // Calendario
     Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario.index');
     Route::get('/calendario/eventos', [CalendarioController::class, 'eventos'])->name('calendario.eventos');
     Route::post('/calendario', [CalendarioController::class, 'store'])->name('calendario.store');
     Route::delete('/calendario/{evento}', [CalendarioController::class, 'destroy'])->name('calendario.destroy');
+
+    Route::resource('ferias', FeriasController::class)->only(['index', 'create', 'store', 'show', 'destroy']);
+    Route::post('ferias/{feria}/aprovar', [FeriasController::class, 'aprovar'])->name('ferias.aprovar');
+    Route::post('ferias/{feria}/reprovar', [FeriasController::class, 'reprovar'])->name('ferias.reprovar');
 });
 
 require __DIR__.'/auth.php';
