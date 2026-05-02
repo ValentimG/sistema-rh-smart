@@ -6,21 +6,6 @@
     <title>Editar Funcionario — SMART RH</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
-    <style>
-        .form-section { background: #fff; border: 1px solid var(--gray-200); border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
-        .form-section-title { font-size: .85rem; font-weight: 700; color: var(--gray-900); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--gray-100); }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .form-group { margin-bottom: 16px; }
-        .form-label { display: block; font-size: .76rem; font-weight: 600; color: var(--gray-800); margin-bottom: 5px; }
-        .form-input, .form-select { width: 100%; padding: 11px 16px; border: 1.5px solid var(--gray-200); border-radius: 10px; font-size: .87rem; outline: none; transition: all .2s; background: #fff; }
-        .form-input:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
-        .form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
-        .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-size: .8rem; }
-        body.dark .form-section { background: rgba(30,41,59,.8); border-color: rgba(255,255,255,.05); }
-        body.dark .form-section-title { color: #f1f5f9; border-bottom-color: rgba(255,255,255,.04); }
-        body.dark .form-label { color: #cbd5e1; }
-        body.dark .form-input, body.dark .form-select { background: #1e293b; border-color: #334155; color: #e2e8f0; }
-    </style>
 </head>
 <body>
     @include('layouts.header')
@@ -28,10 +13,10 @@
         <div class="section-title">Editar Funcionario</div>
 
         @if($errors->any())
-        <div class="alert-error">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div>
+        <div class="alert alert-error">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div>
         @endif
 
-        <form method="POST" action="{{ route('funcionarios.update', $funcionario) }}">
+        <form method="POST" action="{{ route('funcionarios.update', $funcionario) }}" enctype="multipart/form-data">
             @csrf @method('PUT')
 
             <div class="form-section">
@@ -44,6 +29,11 @@
                 <div class="form-row">
                     <div class="form-group"><label class="form-label">Estado Civil</label><select name="estado_civil" class="form-select"><option value="">Selecionar...</option><option value="solteiro" {{ old('estado_civil',$funcionario->estado_civil)=='solteiro'?'selected':'' }}>Solteiro</option><option value="casado" {{ old('estado_civil',$funcionario->estado_civil)=='casado'?'selected':'' }}>Casado</option><option value="divorciado" {{ old('estado_civil',$funcionario->estado_civil)=='divorciado'?'selected':'' }}>Divorciado</option><option value="viuvo" {{ old('estado_civil',$funcionario->estado_civil)=='viuvo'?'selected':'' }}>Viuvo</option></select></div>
                     <div class="form-group"><label class="form-label">Telefone</label><input type="text" name="telefone" class="form-input" value="{{ old('telefone', $funcionario->telefone) }}"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Foto de Perfil</label>
+                    <input type="file" name="foto" class="form-input" accept="image/*" onchange="previewFoto(this)" style="padding:10px">
+                    <img id="foto-preview" class="foto-preview {{ $funcionario->foto_url ? 'visible' : '' }}" src="{{ $funcionario->foto_url }}">
                 </div>
             </div>
 
@@ -82,6 +72,19 @@
             </div>
         </form>
     </main>
+    <script>
+        function previewFoto(input) {
+            var preview = document.getElementById('foto-preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.add('visible');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     <script src="/js/dark.js"></script>
 </body>
 </html>

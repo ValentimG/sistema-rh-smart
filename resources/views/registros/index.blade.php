@@ -1,10 +1,10 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Controle de Ponto â€” SMART RH</title>
+    <title>Controle de Ponto — SMART RH</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -150,12 +150,12 @@
 
         <div class="section-title">Resumo da Semana</div>
         <div class="charts-row">
-            <div class="card"><div class="card-body"><div class="card-subtitle">Horas Trabalhadas â€” Ultimos 7 Dias</div><div class="chart-container"><canvas id="chart-dias"></canvas></div></div></div>
+            <div class="card"><div class="card-body"><div class="card-subtitle">Horas Trabalhadas — Ultimos 7 Dias</div><div class="chart-container"><canvas id="chart-dias"></canvas></div></div></div>
             <div class="card card-center"><div class="card-body"><div class="card-subtitle">Banco de Horas</div><div class="banco-valor {{ $bancoHoras>=0?'text-success':'text-danger' }}">{{ ($bancoHoras>=0?'+':'').number_format($bancoHoras,1,',','.') }}h</div><div class="banco-status">{{ $bancoHoras>=0?'Banco em dia':'Banco negativo' }}</div>@if($hoje->saida)<div class="banco-hoje">{{ $hoje->horasTrabalhadasFormatado() }} hoje</div>@endif</div></div>
         </div>
 
-        <div class="section-title">Historico â€” Ultimos 7 Dias</div>
-        <div class="card"><div class="table-responsive"><table class="tb"><thead><tr><th>Data</th><th class="tc">Entrada</th><th class="tc">Saida Almoco</th><th class="tc">Volta Almoco</th><th class="tc">Saida</th><th class="tr">Total</th></tr></thead><tbody>@forelse($historico as $r)<tr><td><span class="fw-600">{{ $r->data->format('d/m/Y') }}</span><span class="text-muted text-sm">{{ ['Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado'][$r->data->dayOfWeek] }}</span></td><td class="tc">{{ $r->entrada?->format('H:i')??'â€”' }}</td><td class="tc">{{ $r->saida_almoco?->format('H:i')??'â€”' }}</td><td class="tc">{{ $r->volta_almoco?->format('H:i')??'â€”' }}</td><td class="tc">{{ $r->saida?->format('H:i')??'â€”' }}</td><td class="tr">@if($r->horasTrabalhadas()>0)@php $h=(int)$r->horasTrabalhadas();$m=(int)round(($r->horasTrabalhadas()-$h)*60);@endphp<span class="badge {{ $r->horasTrabalhadas()>=8?'badge-success':'badge-warning' }}">{{ $h }}h{{ $m>0?" {$m}min":'' }}</span>@else<span class="text-muted">â€”</span>@endif</td></tr>@empty<tr><td colspan="6" class="text-center text-muted py-4">Nenhum registro nos ultimos 7 dias.</td></tr>@endforelse</tbody></table></div></div>
+        <div class="section-title">Historico — Ultimos 7 Dias</div>
+        <div class="card"><div class="table-responsive"><table class="tb"><thead><tr><th>Data</th><th class="tc">Entrada</th><th class="tc">Saida Almoco</th><th class="tc">Volta Almoco</th><th class="tc">Saida</th><th class="tr">Total</th></tr></thead><tbody>@forelse($historico as $r)<tr><td><span class="fw-600">{{ $r->data->format('d/m/Y') }}</span><span class="text-muted text-sm">{{ ['Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado'][$r->data->dayOfWeek] }}</span></td><td class="tc">{{ $r->entrada?->format('H:i')??'—' }}</td><td class="tc">{{ $r->saida_almoco?->format('H:i')??'—' }}</td><td class="tc">{{ $r->volta_almoco?->format('H:i')??'—' }}</td><td class="tc">{{ $r->saida?->format('H:i')??'—' }}</td><td class="tr">@if($r->horasTrabalhadas()>0)@php $h=(int)$r->horasTrabalhadas();$m=(int)round(($r->horasTrabalhadas()-$h)*60);@endphp<span class="badge {{ $r->horasTrabalhadas()>=8?'badge-success':'badge-warning' }}">{{ $h }}h{{ $m>0?" {$m}min":'' }}</span>@else<span class="text-muted">—</span>@endif</td></tr>@empty<tr><td colspan="6" class="text-center text-muted py-4">Nenhum registro nos ultimos 7 dias.</td></tr>@endforelse</tbody></table></div></div>
     </main>
     <div id="toast-root"></div>
     <script src="/js/ponto.js"></script>

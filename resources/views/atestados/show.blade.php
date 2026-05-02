@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%234f46e5%22/><text x=%224%22 y=%2223%22 fill=%22white%22 font-family=%22system-ui%22 font-weight=%22800%22 font-size=%2215%22>RH</text></svg>"><link rel="stylesheet" href="/rh-theme.css"><script>if(localStorage.getItem('rhDark')=='1')document.documentElement.classList.add('dark')</script><script src="/rh.js" defer></script>
 <title>Atestado #{{ $atestado->id }} — {{ config('app.name') }}</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -158,5 +158,6 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
     </div>
 </body>
 </html>
+
 
 

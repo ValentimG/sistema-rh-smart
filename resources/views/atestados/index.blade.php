@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Atestados — SMART RH</title>
+    <title>Atestados � SMART RH</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/app.css">
     <style>
@@ -87,7 +87,7 @@
                         <tr>
                             @if($atual->isGestor())<td><span class="fw-600">{{ $a->funcionario->nome }}</span><br><span class="text-muted text-sm">{{ $a->funcionario->cargo }}</span></td>@endif
                             <td>{{ $a->tipoLabel() }}</td>
-                            <td>{{ $a->data_inicio->format('d/m/Y') }}{{ !$a->data_inicio->equalTo($a->data_fim)?' → '.$a->data_fim->format('d/m/Y'):'' }}</td>
+                            <td>{{ $a->data_inicio->format('d/m/Y') }}{{ !$a->data_inicio->equalTo($a->data_fim)?' ? '.$a->data_fim->format('d/m/Y'):'' }}</td>
                             <td class="text-center">{{ $a->dias_afastamento }}d</td>
                             <td class="text-center"><span class="badge {{ $a->cobre_horas?'badge-success':'badge-warning' }}">{{ $a->cobre_horas?'Sim':'Nao' }}</span></td>
                             <td class="text-center"><span class="badge {{ $a->status=='aprovado'?'badge-success':($a->status=='reprovado'?'badge-danger':'badge-warning') }}">{{ $a->statusLabel() }}</span></td>

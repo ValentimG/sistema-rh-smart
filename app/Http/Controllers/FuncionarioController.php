@@ -39,6 +39,7 @@ class FuncionarioController extends Controller
             'sexo'                        => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil'                => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
             'telefone'                    => ['nullable', 'string', 'max:20'],
+            'foto'                        => ['nullable', 'image', 'max:2048'],
             'tipo_contrato'               => ['nullable', 'in:clt,pj,estagio,temporario,terceirizado'],
             'beneficios'                  => ['nullable', 'array'],
             'bonificacoes'                => ['nullable', 'array'],
@@ -47,6 +48,10 @@ class FuncionarioController extends Controller
             'exame_demissional_data'      => ['nullable', 'date', 'before_or_equal:today'],
             'exame_demissional_resultado' => ['nullable', 'string', 'max:255'],
         ]);
+
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
+        }
 
         Funcionario::create($validated);
 
@@ -88,6 +93,7 @@ class FuncionarioController extends Controller
             'sexo'                        => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil'                => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
             'telefone'                    => ['nullable', 'string', 'max:20'],
+            'foto'                        => ['nullable', 'image', 'max:2048'],
             'tipo_contrato'               => ['nullable', 'in:clt,pj,estagio,temporario,terceirizado'],
             'beneficios'                  => ['nullable', 'array'],
             'bonificacoes'                => ['nullable', 'array'],
@@ -97,6 +103,13 @@ class FuncionarioController extends Controller
             'exame_demissional_resultado' => ['nullable', 'string', 'max:255'],
         ]);
 
+        if ($request->hasFile('foto')) {
+            if ($funcionario->foto) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($funcionario->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
+        }
+
         $funcionario->update($validated);
 
         return redirect()->route('funcionarios.show', $funcionario)
@@ -105,6 +118,10 @@ class FuncionarioController extends Controller
 
     public function destroy(Funcionario $funcionario): RedirectResponse
     {
+        if ($funcionario->foto) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($funcionario->foto);
+        }
+
         $funcionario->delete();
 
         return redirect()->route('funcionarios.index')

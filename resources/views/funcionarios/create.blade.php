@@ -16,6 +16,8 @@
         .form-input:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,.08); }
         .form-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
         .alert-error { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; padding: 12px 16px; border-radius: 10px; margin-bottom: 18px; font-size: .8rem; }
+        .foto-preview { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; margin-top: 8px; display: none; border: 2px solid var(--gray-200); }
+        .foto-preview.visible { display: block; }
         body.dark .form-section { background: rgba(30,41,59,.8); border-color: rgba(255,255,255,.05); }
         body.dark .form-section-title { color: #f1f5f9; border-bottom-color: rgba(255,255,255,.04); }
         body.dark .form-label { color: #cbd5e1; }
@@ -31,7 +33,7 @@
         <div class="alert-error">@foreach($errors->all() as $e)<div>{{ $e }}</div>@endforeach</div>
         @endif
 
-        <form method="POST" action="{{ route('funcionarios.store') }}">
+        <form method="POST" action="{{ route('funcionarios.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="form-section">
@@ -44,6 +46,11 @@
                 <div class="form-row">
                     <div class="form-group"><label class="form-label">Estado Civil</label><select name="estado_civil" class="form-select"><option value="">Selecionar...</option><option value="solteiro" {{ old('estado_civil')=='solteiro'?'selected':'' }}>Solteiro</option><option value="casado" {{ old('estado_civil')=='casado'?'selected':'' }}>Casado</option><option value="divorciado" {{ old('estado_civil')=='divorciado'?'selected':'' }}>Divorciado</option><option value="viuvo" {{ old('estado_civil')=='viuvo'?'selected':'' }}>Viuvo</option></select></div>
                     <div class="form-group"><label class="form-label">Telefone</label><input type="text" name="telefone" class="form-input" value="{{ old('telefone') }}"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Foto de Perfil</label>
+                    <input type="file" name="foto" class="form-input" accept="image/*" onchange="previewFoto(this)" style="padding:10px">
+                    <img id="foto-preview" class="foto-preview">
                 </div>
             </div>
 
@@ -82,6 +89,19 @@
             </div>
         </form>
     </main>
+    <script>
+        function previewFoto(input) {
+            var preview = document.getElementById('foto-preview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.add('visible');
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
     <script src="/js/dark.js"></script>
 </body>
 </html>
