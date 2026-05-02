@@ -25,6 +25,7 @@
             @endif
             <a href="{{ route('profile.edit') }}" class="nl {{ $currentRoute == 'profile.edit' ? 'on' : '' }}">Perfil</a>
         </div>
+	<button class="theme-toggle">☾</button>
         <div class="av">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</div>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

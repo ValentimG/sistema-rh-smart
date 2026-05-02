@@ -141,5 +141,6 @@
         };
     </script>
     <script src="/js/charts.js"></script>
+<script src="/js/dark.js"></script>
 </body>
 </html>
