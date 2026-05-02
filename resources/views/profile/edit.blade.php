@@ -1,46 +1,80 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="csrf-token" content="{{ csrf_token() }}">
-<title>Meu Perfil — SMART RH</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
-body{background:#f8f9fa;color:#111827;min-height:100vh}
-.hd{background:#fff;border-bottom:1px solid #e5e7eb;padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-ic{width:32px;height:32px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.72rem}
-.logo-n{font-size:.9rem;font-weight:700;color:#111827}.logo-s{font-size:.58rem;color:#9ca3af;font-weight:500}
-.hd-r{display:flex;align-items:center;gap:10px}
-.nav{display:flex;gap:2px}
-.nl{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:7px;color:#6b7280;text-decoration:none;font-size:.8rem;font-weight:500;transition:.15s}
-.nl:hover,.nl.on{background:#eff6ff;color:#2563eb}
-.av{width:34px;height:34px;background:#2563eb;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem;flex-shrink:0}
-.lg-btn{display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:7px;color:#9ca3af;font-size:.8rem;font-weight:500;background:none;border:none;cursor:pointer;transition:.15s}
-.lg-btn:hover{background:#f3f4f6;color:#374151}
-.pg{max-width:600px;margin:0 auto;padding:40px 24px}
-.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:24px;margin-bottom:20px}
-.card-tt{font-size:1rem;font-weight:600;color:#111827;margin-bottom:16px}
-.btn-p{display:inline-flex;padding:10px 24px;background:#2563eb;color:#fff;border:none;border-radius:7px;font-weight:600;font-size:.87rem;cursor:pointer;text-decoration:none;transition:.2s}
-.btn-p:hover{background:#1d4ed8}
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:.8rem;font-weight:600;color:#374151;margin-bottom:5px}
-.form-input{width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:7px;font-size:.9rem;outline:none}
-.form-input:focus{border-color:#2563eb}
-.alert{padding:12px 16px;border-radius:8px;font-size:.82rem;font-weight:500;margin-bottom:18px}
-.alert-ok{background:#dcfce7;color:#065f46;border:1px solid #a7f3d0}
-.btn-del{display:inline-flex;padding:10px 24px;background:#dc2626;color:#fff;border:none;border-radius:7px;font-weight:600;font-size:.87rem;cursor:pointer}
-.btn-del:hover{background:#b91c1c}
-</style>
+    <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Meu Perfil — SMART RH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--primary:#2563eb;--success:#10b981;--danger:#ef4444;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-400:#94a3b8;--gray-600:#475569;--gray-800:#1e293b;--gray-900:#0f172a}
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#eff6ff 0%,#f8fafc 50%,#fef3c7 100%);color:var(--gray-900);min-height:100vh}
+        .hd{background:rgba(255,255,255,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.05);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+        .logo{display:flex;align-items:center;gap:10px}
+        .logo-ic{width:36px;height:36px;background:linear-gradient(135deg,var(--primary),#6366f1);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.75rem;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+        .logo-n{font-size:.9rem;font-weight:800;color:var(--gray-900)}.logo-s{font-size:.55rem;color:var(--gray-400)}
+        .hd-r{display:flex;align-items:center;gap:12px}.nav{display:flex;gap:3px}
+        .nl{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;color:var(--gray-600);text-decoration:none;font-size:.8rem;font-weight:500;transition:all .2s}
+        .nl:hover,.nl.on{background:rgba(37,99,235,.08);color:var(--primary)}
+        .av{width:34px;height:34px;background:linear-gradient(135deg,var(--primary),#6366f1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.78rem}
+        .lg-btn{display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:7px;color:var(--gray-400);font-size:.8rem;font-weight:500;background:none;border:none;cursor:pointer}.lg-btn:hover{background:var(--gray-100);color:var(--gray-800)}
+        .pg{max-width:560px;margin:0 auto;padding:40px 24px}
+        .card{background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:28px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+        .card-title{font-size:1rem;font-weight:700;color:var(--gray-900);margin-bottom:4px}
+        .card-desc{font-size:.82rem;color:var(--gray-400);margin-bottom:24px}
+        .form-group{margin-bottom:18px}
+        .form-label{display:block;font-size:.78rem;font-weight:600;color:var(--gray-800);margin-bottom:5px}
+        .form-input{width:100%;padding:11px 16px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:.87rem;outline:none;transition:all .2s;background:#fff}
+        .form-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+        .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 24px;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;border:none;text-decoration:none}
+        .btn-primary{background:linear-gradient(135deg,var(--primary),#6366f1);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.25)}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,99,235,.35)}
+        .btn-danger{background:#fee2e2;color:var(--danger)}
+        .btn-danger:hover{background:#fecaca}
+        .theme-toggle{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--gray-200);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .3s}
+        .theme-toggle:hover{border-color:var(--primary)}
+        .alert{padding:12px 16px;border-radius:10px;font-size:.8rem;margin-bottom:20px}
+        .alert-success{background:#dcfce7;color:#065f46;border:1px solid #a7f3d0}
+        body.dark{background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);color:#e2e8f0}
+        body.dark .hd{background:rgba(15,23,42,.9);border-bottom-color:rgba(255,255,255,.05)}
+        body.dark .logo-n{color:#f1f5f9}
+        body.dark .nl{color:#94a3b8}
+        body.dark .nl:hover,body.dark .nl.on{background:rgba(37,99,235,.15);color:#60a5fa}
+        body.dark .card{background:rgba(30,41,59,.8);border-color:rgba(255,255,255,.05)}
+        body.dark .card-title{color:#f1f5f9}
+        body.dark .card-desc{color:#64748b}
+        body.dark .form-label{color:#cbd5e1}
+        body.dark .form-input{background:#1e293b;border-color:#334155;color:#e2e8f0}
+        body.dark .lg-btn{color:#64748b}
+        body.dark .lg-btn:hover{background:rgba(255,255,255,.05);color:#94a3b8}
+        body.dark .theme-toggle{background:#1e293b;border-color:#334155}
+    </style>
 </head>
 <body>
-@php $navFunc = Auth::user()->funcionario ?? null; @endphp
-@include('layouts.header')
-<main class="pg">
-  @include('profile.partials.update-profile-information-form')
-  @include('profile.partials.update-password-form')
-  @include('profile.partials.delete-user-form')
-</main>
+    @include('layouts.header')
+    <main class="pg">
+        @if(session('status')==='profile-updated')
+        <div class="alert alert-success">Perfil atualizado com sucesso.</div>
+        @endif
+
+        <div class="card">
+            <div class="card-title">Informacoes do Perfil</div>
+            <div class="card-desc">Atualize seu nome e e-mail.</div>
+            @include('profile.partials.update-profile-information-form')
+        </div>
+
+        <div class="card">
+            <div class="card-title">Alterar Senha</div>
+            <div class="card-desc">Use uma senha longa e segura.</div>
+            @include('profile.partials.update-password-form')
+        </div>
+
+        <div class="card" style="border-color:#fecaca">
+            <div class="card-title" style="color:var(--danger)">Excluir Conta</div>
+            <div class="card-desc">Ao excluir sua conta, todos os dados serao permanentemente removidos.</div>
+            @include('profile.partials.delete-user-form')
+        </div>
+    </main>
+    <script src="/js/dark.js"></script>
 </body>
 </html>

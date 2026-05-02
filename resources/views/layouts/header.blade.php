@@ -18,14 +18,16 @@
                 <a href="{{ route('gestor.dashboard') }}" class="nl {{ $currentRoute == 'gestor.dashboard' ? 'on' : '' }}">Dashboard</a>
                 <a href="{{ route('funcionarios.index') }}" class="nl {{ str_starts_with($currentRoute, 'funcionarios') ? 'on' : '' }}">Funcionarios</a>
                 <a href="{{ route('atestados.index') }}" class="nl {{ str_starts_with($currentRoute, 'atestados') ? 'on' : '' }}">Atestados</a>
+                <a href="{{ route('calendario.index') }}" class="nl {{ $currentRoute == 'calendario.index' ? 'on' : '' }}">Calendario</a>
                 <a href="{{ route('gestor.exportar-csv') }}" class="nl">Exportar CSV</a>
             @else
                 <a href="{{ route('ponto.index') }}" class="nl {{ $currentRoute == 'ponto.index' ? 'on' : '' }}">Meu Ponto</a>
                 <a href="{{ route('atestados.index') }}" class="nl {{ str_starts_with($currentRoute, 'atestados') ? 'on' : '' }}">Atestados</a>
+                <a href="{{ route('calendario.index') }}" class="nl {{ $currentRoute == 'calendario.index' ? 'on' : '' }}">Calendario</a>
             @endif
             <a href="{{ route('profile.edit') }}" class="nl {{ $currentRoute == 'profile.edit' ? 'on' : '' }}">Perfil</a>
         </div>
-	<button class="theme-toggle">☾</button>
+        <button class="theme-toggle">☾</button>
         <div class="av">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</div>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

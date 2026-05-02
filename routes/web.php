@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AtestadoController;
+use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegistroPontoController;
@@ -51,6 +52,12 @@ Route::middleware('auth')->group(function () {
     // Completar perfil apos registro
     Route::get('/completar-perfil', [FuncionarioController::class, 'completarPerfil'])->name('perfil.completar');
     Route::post('/completar-perfil', [FuncionarioController::class, 'salvarPerfil'])->name('perfil.salvar');
+
+    // Calendario
+    Route::get('/calendario', [CalendarioController::class, 'index'])->name('calendario.index');
+    Route::get('/calendario/eventos', [CalendarioController::class, 'eventos'])->name('calendario.eventos');
+    Route::post('/calendario', [CalendarioController::class, 'store'])->name('calendario.store');
+    Route::delete('/calendario/{evento}', [CalendarioController::class, 'destroy'])->name('calendario.destroy');
 });
 
 require __DIR__.'/auth.php';
