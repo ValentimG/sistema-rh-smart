@@ -46,6 +46,10 @@ Route::middleware('auth')->group(function () {
         ->middleware('gestor')
         ->name('gestor.exportar-csv');
 
+    Route::get('/gestor/extrato/{funcionario}', [RegistroPontoController::class, 'extratoFuncionario'])
+        ->middleware('gestor')
+        ->name('gestor.extrato');
+
     Route::resource('atestados', AtestadoController::class)->except(['edit', 'update']);
     Route::post('atestados/{atestado}/aprovar', [AtestadoController::class, 'aprovar'])->name('atestados.aprovar');
     Route::post('atestados/{atestado}/reprovar', [AtestadoController::class, 'reprovar'])->name('atestados.reprovar');
