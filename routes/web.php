@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/ponto/saida-almoco', [RegistroPontoController::class, 'registrarSaidaAlmoco'])->name('ponto.saida-almoco');
         Route::post('/ponto/volta-almoco', [RegistroPontoController::class, 'registrarVoltaAlmoco'])->name('ponto.volta-almoco');
         Route::post('/ponto/saida', [RegistroPontoController::class, 'registrarSaida'])->name('ponto.saida');
+        Route::get('/extrato-banco-horas', [RegistroPontoController::class, 'extratoBancoHoras'])->name('ponto.extrato');
     });
 
     Route::get('/gestor/dashboard', [RegistroPontoController::class, 'dashboardGestor'])
