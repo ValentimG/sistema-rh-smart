@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AjustePontoController;
 use App\Http\Controllers\AtestadoController;
 use App\Http\Controllers\CalendarioController;
 use App\Http\Controllers\FeriasController;
@@ -65,6 +66,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('ferias', FeriasController::class)->only(['index', 'create', 'store', 'show', 'destroy']);
     Route::post('ferias/{feria}/aprovar', [FeriasController::class, 'aprovar'])->name('ferias.aprovar');
     Route::post('ferias/{feria}/reprovar', [FeriasController::class, 'reprovar'])->name('ferias.reprovar');
+
+    Route::resource('ajustes', AjustePontoController::class)->only(['index', 'create', 'store']);
+    Route::post('ajustes/{ajuste}/aprovar', [AjustePontoController::class, 'aprovar'])->name('ajustes.aprovar');
+    Route::post('ajustes/{ajuste}/reprovar', [AjustePontoController::class, 'reprovar'])->name('ajustes.reprovar');
 });
 
 require __DIR__.'/auth.php';

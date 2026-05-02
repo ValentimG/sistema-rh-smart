@@ -20,6 +20,7 @@
                 <a href="{{ route('atestados.index') }}" class="nl {{ str_starts_with($currentRoute, 'atestados') ? 'on' : '' }}">Atestados</a>
                 <a href="{{ route('calendario.index') }}" class="nl {{ $currentRoute == 'calendario.index' ? 'on' : '' }}">Calendario</a>
                 <a href="{{ route('ferias.index') }}" class="nl {{ str_starts_with($currentRoute, 'ferias') ? 'on' : '' }}">Ferias</a>
+                <a href="{{ route('ajustes.index') }}" class="nl {{ str_starts_with($currentRoute, 'ajustes') ? 'on' : '' }}">Ajustes</a>
                 <a href="{{ route('funcionarios.index') }}" class="nl">Extrato</a>
                 <a href="{{ route('gestor.exportar-csv') }}" class="nl">Exportar CSV</a>
             @else
@@ -28,6 +29,7 @@
                 <a href="{{ route('calendario.index') }}" class="nl {{ $currentRoute == 'calendario.index' ? 'on' : '' }}">Calendario</a>
                 <a href="{{ route('ferias.index') }}" class="nl {{ str_starts_with($currentRoute, 'ferias') ? 'on' : '' }}">Ferias</a>
                 <a href="{{ route('ponto.extrato') }}" class="nl {{ $currentRoute == 'ponto.extrato' ? 'on' : '' }}">Extrato</a>
+                <a href="{{ route('ajustes.index') }}" class="nl {{ str_starts_with($currentRoute, 'ajustes') ? 'on' : '' }}">Ajustes</a>
             @endif
             <a href="{{ route('profile.edit') }}" class="nl {{ $currentRoute == 'profile.edit' ? 'on' : '' }}">Perfil</a>
         </div>

@@ -19,6 +19,8 @@ class Funcionario extends Model
         'tipo',
         'salario_base',
         'carga_horaria_mensal',
+        'horario_entrada_padrao',
+        'tolerancia_atraso_minutos',
         'banco_horas',
         'data_nascimento',
         'sexo',
@@ -43,6 +45,8 @@ class Funcionario extends Model
         'bonificacoes' => 'array',
         'salario_base' => 'decimal:2',
         'banco_horas' => 'decimal:2',
+        'horario_entrada_padrao' => 'datetime',
+        'tolerancia_atraso_minutos' => 'integer',
     ];
 
     public function user(): BelongsTo
@@ -68,6 +72,11 @@ class Funcionario extends Model
     public function historicoAfastamentos(): HasMany
     {
         return $this->hasMany(HistoricoAfastamento::class);
+    }
+
+    public function ajustesPonto(): HasMany
+    {
+        return $this->hasMany(AjustePonto::class);
     }
 
     public function isGestor(): bool
