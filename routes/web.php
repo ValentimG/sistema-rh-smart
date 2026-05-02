@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => redirect()->route('login'));
 
-Route::get('/dashboard', fn () => view('dashboard'))
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/dashboard', function () {
+    $funcionario = Auth::user()->funcionario;
+    if ($funcionario && $funcionario->isGestor()) {
+        return redirect()->route('gestor.dashboard');
+    }
+    if ($funcionario) {
+        return redirect()->route('ponto.index');
+    }
+    return redirect()->route('login');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
