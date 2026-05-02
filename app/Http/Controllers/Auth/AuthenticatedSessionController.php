@@ -14,8 +14,17 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create(): View|RedirectResponse
     {
+        if (Auth::check()) {
+            $funcionario = Auth::user()->funcionario;
+            if ($funcionario && $funcionario->isGestor()) {
+                return redirect()->route('gestor.dashboard');
+            }
+            if ($funcionario) {
+                return redirect()->route('ponto.index');
+            }
+        }
         return view('auth.login');
     }
 
@@ -28,18 +37,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Redireciona conforme o tipo do funcionário vinculado
         $funcionario = Auth::user()->funcionario;
-
-        if ($funcionario?->isGestor()) {
-            return redirect()->intended(route('gestor.dashboard'));
+        if ($funcionario && $funcionario->isGestor()) {
+            return redirect()->route('gestor.dashboard');
         }
-
         if ($funcionario) {
-            return redirect()->intended(route('ponto.index'));
+            return redirect()->route('ponto.index');
         }
 
-        // Fallback: usuário sem vínculo com funcionário (ex: admin puro)
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
@@ -51,7 +56,6 @@ class AuthenticatedSessionController extends Controller
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
