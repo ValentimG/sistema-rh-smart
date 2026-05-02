@@ -36,27 +36,7 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
 </head>
 <body>
 @php $navFunc = Auth::user()->funcionario ?? null; @endphp
-<header class="hd">
-  <div class="logo">
-    <div class="logo-ic">RH</div>
-    <div><div class="logo-n">SMART RH</div><div class="logo-s">MEU PERFIL</div></div>
-  </div>
-  <div class="hd-r">
-    <nav class="nav">
-      @if($navFunc && $navFunc->isGestor())
-      <a href="{{ route('gestor.dashboard') }}" class="nl">Dashboard</a>
-      <a href="{{ route('funcionarios.index') }}" class="nl">Funcionarios</a>
-      @else
-      <a href="{{ route('ponto.index') }}" class="nl">Meu Ponto</a>
-      @endif
-      <a href="{{ route('atestados.index') }}" class="nl">Atestados</a>
-    </nav>
-    <div class="av">{{ strtoupper(substr(Auth::user()->name,0,1)) }}</div>
-    <form method="POST" action="{{ route('logout') }}">@csrf
-      <button type="submit" class="lg-btn">Sair</button>
-    </form>
-  </div>
-</header>
+@include('layouts.header')
 <main class="pg">
   @include('profile.partials.update-profile-information-form')
   @include('profile.partials.update-password-form')

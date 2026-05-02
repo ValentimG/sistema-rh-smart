@@ -77,31 +77,7 @@ body{background:#fff;color:#111827;min-height:100vh}
 </style>
 </head>
 <body>
-<header class="hd">
-  <div class="logo">
-    <div class="logo-ic">RH</div>
-    <div><div class="logo-n">SMART RH</div><div class="logo-s">CONTROLE DE PONTO</div></div>
-  </div>
-  <div class="hd-r">
-    <nav class="nav">
-      <a href="{{ route('ponto.index') }}" class="nl on">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ponto
-      </a>
-      <a href="{{ route('atestados.index') }}" class="nl">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Atestados
-      </a>
-      <a href="{{ route('profile.edit') }}" class="nl">
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Perfil
-      </a>
-    </nav>
-    <div class="av">{{ strtoupper(substr(Auth::user()->name,0,1)) }}</div>
-    <form method="POST" action="{{ route('logout') }}">@csrf
-      <button type="submit" class="lg-btn">
-        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair
-      </button>
-    </form>
-  </div>
-</header>
+@include('layouts.header')
 <main class="pg">
   <div class="clk-sec">
     <div class="clk-t" id="clock">--:--:--</div>

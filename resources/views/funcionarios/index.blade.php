@@ -61,32 +61,7 @@ body{background:#f8f9fa;color:#111827;min-height:100vh}
 </style>
 </head>
 <body>
-<header class="hd">
-  <div class="logo">
-    <div class="logo-ic">RH</div>
-    <div><div class="logo-n">SMART RH</div><div class="logo-s">GESTAO DE FUNCIONARIOS</div></div>
-  </div>
-  <div class="hd-r">
-    <nav class="nav">
-      <a href="{{ route('gestor.dashboard') }}" class="nl">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard
-      </a>
-      <a href="{{ route('funcionarios.index') }}" class="nl on">
-        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Funcionarios
-      </a>
-      <a href="{{ route('atestados.index') }}" class="nl">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Atestados
-      </a>
-    </nav>
-    <div class="av">{{ strtoupper(substr(Auth::user()->name,0,1)) }}</div>
-    <span style="font-size:.82rem;font-weight:500;color:#374151">{{ Auth::user()->name }}</span>
-    <form method="POST" action="{{ route('logout') }}">@csrf
-      <button type="submit" class="lg-btn">
-        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Sair
-      </button>
-    </form>
-  </div>
-</header>
+@include('layouts.header')
 
 <main class="pg">
   @if(session('success'))
