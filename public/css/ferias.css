@@ -35,3 +35,10 @@ body.dark .ferias-stat-label { color: #64748b; }
 body.dark .dias-badge { background: rgba(255,255,255,.05); color: #94a3b8; }
 body.dark .btn-sm { background: #1e293b; border-color: #334155; color: #94a3b8; }
 body.dark .empty-state svg { stroke: #334155; }
+
+.dias-preview { display: flex; align-items: center; gap: 14px; padding: 18px; background: linear-gradient(135deg, rgba(37,99,235,.06), rgba(37,99,235,.02)); border: 1px solid rgba(37,99,235,.15); border-radius: 14px; margin-bottom: 18px; }
+.dias-preview-icon { width: 40px; height: 40px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.dias-preview-label { display: block; font-size: .7rem; color: var(--gray-400); text-transform: uppercase; letter-spacing: .5px; }
+.dias-preview-value { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+.btn-lg { width: 100%; padding: 14px 24px; font-size: .9rem; border-radius: 14px; justify-content: center; }
+body.dark .dias-preview { background: rgba(37,99,235,.1); border-color: rgba(37,99,235,.2); }
