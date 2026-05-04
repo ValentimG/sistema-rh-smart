@@ -16,21 +16,19 @@
     @include('layouts.header')
 
     <main class="pg">
-        <div class="page-header">
-            <a href="{{ route('funcionarios.index') }}" class="back-link">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-                Voltar
-            </a>
-        </div>
+        <a href="{{ route('funcionarios.index') }}" class="back-link">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Voltar para Funcionarios
+        </a>
 
         <div class="profile-hero">
             <div class="profile-avatar" style="background:{{ $cor }}">{{ $ini }}</div>
             <div>
                 <h2 class="profile-name">{{ $funcionario->nome }}</h2>
                 <p class="profile-cargo">{{ $funcionario->cargo }}</p>
-                <div style="margin-top:6px">
+                <div style="margin-top:6px;display:flex;gap:6px">
                     <span class="badge {{ $funcionario->isGestor()?'badge-gestor':'badge-func' }}">{{ $funcionario->isGestor()?'Gestor':'Funcionario' }}</span>
-                    <span class="badge badge-info ml-2">{{ strtoupper($funcionario->tipo_contrato ?? 'CLT') }}</span>
+                    <span class="badge badge-info">{{ strtoupper($funcionario->tipo_contrato ?? 'CLT') }}</span>
                 </div>
             </div>
             <div style="margin-left:auto;display:flex;gap:8px">
@@ -40,7 +38,8 @@
         </div>
 
         <div class="grid-3">
-            <div class="card"><div class="card-header"><span class="card-title">Dados Pessoais</span></div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Dados Pessoais</span></div>
                 <div class="card-body">
                     <div class="info-list">
                         <div class="info-row"><span class="info-label">E-mail</span><span class="info-value">{{ $funcionario->email }}</span></div>
@@ -52,7 +51,8 @@
                 </div>
             </div>
 
-            <div class="card"><div class="card-header"><span class="card-title">Contrato</span></div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Contrato</span></div>
                 <div class="card-body">
                     <div class="info-list">
                         <div class="info-row"><span class="info-label">Tipo</span><span class="info-value">{{ $funcionario->tipoContratoLabel() }}</span></div>
@@ -62,7 +62,8 @@
                 </div>
             </div>
 
-            <div class="card"><div class="card-header"><span class="card-title">Remuneracao</span></div>
+            <div class="card">
+                <div class="card-header"><span class="card-title">Remuneracao</span></div>
                 <div class="card-body">
                     <div class="info-list">
                         <div class="info-row"><span class="info-label">Salario</span><span class="info-value text-success fw-700">{{ $funcionario->salario_base ? 'R$ '.number_format($funcionario->salario_base,2,',','.') : '—' }}</span></div>
@@ -80,7 +81,7 @@
                 <button class="tab-btn" onclick="showTab('cargos',this)">Historico de Cargos</button>
                 <button class="tab-btn" onclick="showTab('afastamentos',this)">Afastamentos</button>
             </div>
-            <a href="{{ route('atestados.create',['funcionario_id'=>$funcionario->id]) }}" class="btn btn-primary btn-sm">+ Novo Atestado</a>
+            <a href="{{ route('atestados.create',['funcionario_id'=>$funcionario->id]) }}" class="btn btn-primary" style="margin-bottom:1px">+ Novo Atestado</a>
         </div>
 
         <div id="tab-atestados" class="tab-panel act">
