@@ -295,3 +295,21 @@ body.dark .info-card-value { color: #e2e8f0; }
     content: '';
     display: none;
 }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gray-400); text-decoration: none; font-size: .82rem; margin-bottom: 8px; transition: all .2s; }
+.back-link:hover { color: var(--primary); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+.info-list { list-style: none; }
+.tabs-wrap { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 0; }
+.tabs { display: flex; gap: 2px; }
+.tab-btn { padding: 9px 16px; border: 1px solid var(--gray-200); border-bottom: none; border-radius: 8px 8px 0 0; font-size: .8rem; font-weight: 600; color: var(--gray-600); background: var(--gray-50); cursor: pointer; transition: all .2s; }
+.tab-btn.act { background: #fff; color: var(--primary); border-color: var(--primary); border-bottom-color: #fff; position: relative; z-index: 1; }
+.tab-panel { display: none; background: #fff; border: 1px solid var(--gray-200); border-radius: 0 8px 8px 8px; overflow: hidden; }
+.tab-panel.act { display: block; }
+.tab-badge { background: #f59e0b; color: #fff; border-radius: 999px; padding: 1px 7px; font-size: .63rem; margin-left: 5px; }
+body.dark .grid-3 .card { background: rgba(30,41,59,.8); }
+body.dark .tab-btn { background: rgba(30,41,59,.5); border-color: rgba(255,255,255,.05); color: #94a3b8; }
+body.dark .tab-btn.act { background: rgba(30,41,59,.8); color: #60a5fa; border-color: #60a5fa; border-bottom-color: transparent; }
+body.dark .tab-panel { background: rgba(30,41,59,.8); border-color: rgba(255,255,255,.05); }
+body.dark .back-link { color: #64748b; }
+body.dark .back-link:hover { color: #60a5fa; }
