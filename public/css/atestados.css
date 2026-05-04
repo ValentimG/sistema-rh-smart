@@ -1,0 +1,67 @@
+/* Atestados - Detalhes */
+.pg-sm { max-width: 800px; }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gray-400); text-decoration: none; font-size: .82rem; margin-bottom: 20px; transition: all .2s; }
+.back-link:hover { color: var(--primary); }
+
+.atestado-hero { padding: 32px; border-radius: 20px; margin-bottom: 24px; text-align: center; }
+.atestado-hero.status-aprovado { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+.atestado-hero.status-pendente { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+.atestado-hero.status-reprovado { background: linear-gradient(135deg, #fee2e2, #fecaca); }
+
+.atestado-hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 999px; font-size: .8rem; font-weight: 700; margin-bottom: 16px; background: rgba(255,255,255,.8); backdrop-filter: blur(8px); }
+.status-aprovado .atestado-hero-badge { color: #065f46; }
+.status-pendente .atestado-hero-badge { color: #92400e; }
+.status-reprovado .atestado-hero-badge { color: #991b1b; }
+
+.atestado-hero-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+.status-aprovado .atestado-hero-title { color: #065f46; }
+.status-pendente .atestado-hero-title { color: #92400e; }
+.status-reprovado .atestado-hero-title { color: #991b1b; }
+
+.atestado-hero-periodo { font-size: .85rem; opacity: .7; }
+
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.status-aprovado .status-dot { background: #10b981; }
+.status-pendente .status-dot { background: #f59e0b; }
+.status-reprovado .status-dot { background: #ef4444; }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.detail-col { text-align: center; }
+.detail-col:first-child { border-right: 1px solid var(--gray-100); padding-right: 32px; }
+.detail-col:last-child { text-align: left; }
+
+.detail-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-400); margin-bottom: 16px; }
+
+.detail-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 1.2rem; margin: 0 auto 12px; }
+.detail-name { font-size: 1rem; font-weight: 700; color: var(--gray-900); }
+.detail-cargo { font-size: .8rem; color: var(--gray-400); margin-top: 2px; }
+.detail-email { font-size: .78rem; color: var(--gray-400); margin-top: 4px; }
+
+.detail-list { list-style: none; }
+.detail-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--gray-100); gap: 16px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-row dt { font-size: .72rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; }
+.detail-row dd { font-size: .85rem; font-weight: 500; color: var(--gray-900); text-align: right; }
+.detail-row-full { flex-direction: column; gap: 4px; }
+.detail-row-full dd { text-align: left; }
+
+.attachment-box { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding: 14px 18px; background: var(--gray-50); border-radius: 12px; font-size: .82rem; color: var(--gray-600); }
+.attachment-box .btn { margin-left: auto; }
+
+.action-bar { display: flex; gap: 12px; margin-top: 24px; }
+.action-bar form { flex: 1; }
+.btn-lg { width: 100%; padding: 14px 24px; font-size: .9rem; border-radius: 14px; }
+.btn-success { background: var(--success); color: #fff; }
+.btn-success:hover { background: #059669; transform: translateY(-2px); }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { background: #dc2626; transform: translateY(-2px); }
+
+/* Dark */
+body.dark .detail-col:first-child { border-right-color: rgba(255,255,255,.06); }
+body.dark .detail-name { color: #f1f5f9; }
+body.dark .detail-row { border-bottom-color: rgba(255,255,255,.04); }
+body.dark .detail-row dd { color: #e2e8f0; }
+body.dark .attachment-box { background: rgba(255,255,255,.03); color: #94a3b8; }
+body.dark .back-link { color: #64748b; }
+body.dark .back-link:hover { color: #60a5fa; }
