@@ -323,3 +323,33 @@ body.dark input[readonly] {
     background: rgba(30,41,59,.6);
     color: #94a3b8;
 }
+
+/* Employee Hero */
+.employee-hero { display: flex; align-items: center; gap: 24px; background: #fff; border: 1px solid var(--gray-200); border-radius: 20px; padding: 32px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
+.employee-hero-avatar { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 1.8rem; flex-shrink: 0; }
+.employee-hero-info { flex: 1; }
+.employee-hero-name { font-size: 1.4rem; font-weight: 800; color: var(--gray-900); letter-spacing: -.3px; }
+.employee-hero-role { font-size: .9rem; color: var(--gray-400); margin-top: 2px; }
+.employee-hero-badges { display: flex; gap: 6px; margin-top: 10px; }
+.employee-hero-actions { display: flex; gap: 8px; }
+
+/* Detail Cards */
+.card-detail { border-radius: 16px; overflow: hidden; }
+.card-header-detail { display: flex; align-items: center; gap: 8px; padding: 14px 20px; background: var(--gray-50); border-bottom: 1px solid var(--gray-100); font-size: .78rem; font-weight: 700; color: var(--gray-600); text-transform: uppercase; letter-spacing: .5px; }
+.card-body-detail { padding: 12px 0; }
+.detail-item { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--gray-50); }
+.detail-item:last-child { border-bottom: none; }
+.detail-label { font-size: .75rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: .4px; }
+.detail-value { font-size: .85rem; font-weight: 500; color: var(--gray-900); text-align: right; }
+.detail-value.highlight { color: var(--success); font-weight: 700; font-size: .9rem; }
+.detail-value.mono { font-family: 'SF Mono','Cascadia Code',monospace; font-size: .8rem; }
+.detail-value.tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; }
+.tag { background: #eff6ff; color: var(--primary); padding: 2px 8px; border-radius: 999px; font-size: .68rem; font-weight: 600; }
+
+body.dark .employee-hero { background: rgba(30,41,59,.8); border-color: rgba(255,255,255,.05); }
+body.dark .employee-hero-name { color: #f1f5f9; }
+body.dark .card-header-detail { background: rgba(15,23,42,.6); color: #64748b; border-bottom-color: rgba(255,255,255,.04); }
+body.dark .detail-item { border-bottom-color: rgba(255,255,255,.03); }
+body.dark .detail-label { color: #64748b; }
+body.dark .detail-value { color: #e2e8f0; }
+body.dark .tag { background: rgba(37,99,235,.15); color: #60a5fa; }
