@@ -39,7 +39,6 @@ class FuncionarioController extends Controller
             'sexo'                        => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil'                => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
             'telefone'                    => ['nullable', 'string', 'min:14', 'max:15'],
-            'foto'                        => ['nullable', 'image', 'max:2048'],
             'tipo_contrato'               => ['nullable', 'in:clt,pj,estagio,temporario,terceirizado'],
             'beneficios'                  => ['nullable', 'array'],
             'bonificacoes'                => ['nullable', 'array'],
@@ -52,14 +51,10 @@ class FuncionarioController extends Controller
             'telefone.min' => 'Digite o telefone no formato (XX) XXXXX-XXXX.',
         ]);
 
-        if ($request->hasFile('foto')) {
-            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
-        }
-
         Funcionario::create($validated);
 
         return redirect()->route('funcionarios.index')
-            ->with('success', 'Funcionário cadastrado com sucesso.');
+            ->with('success', 'Funcionario cadastrado com sucesso.');
     }
 
     public function show(Funcionario $funcionario): View
@@ -90,7 +85,6 @@ class FuncionarioController extends Controller
             'sexo'                        => ['nullable', 'in:masculino,feminino,outro,prefiro_nao_informar'],
             'estado_civil'                => ['nullable', 'in:solteiro,casado,divorciado,viuvo,uniao_estavel'],
             'telefone'                    => ['nullable', 'string', 'min:14', 'max:15'],
-            'foto'                        => ['nullable', 'image', 'max:2048'],
             'tipo_contrato'               => ['nullable', 'in:clt,pj,estagio,temporario,terceirizado'],
             'beneficios'                  => ['nullable', 'array'],
             'bonificacoes'                => ['nullable', 'array'],
@@ -103,26 +97,16 @@ class FuncionarioController extends Controller
             'telefone.min' => 'Digite o telefone no formato (XX) XXXXX-XXXX.',
         ]);
 
-        if ($request->hasFile('foto')) {
-            if ($funcionario->foto) {
-                \Illuminate\Support\Facades\Storage::disk('public')->delete($funcionario->foto);
-            }
-            $validated['foto'] = $request->file('foto')->store('fotos', 'public');
-        }
-
         $funcionario->update($validated);
 
         return redirect()->route('funcionarios.show', $funcionario)
-            ->with('success', 'Funcionário atualizado com sucesso.');
+            ->with('success', 'Funcionario atualizado com sucesso.');
     }
 
     public function destroy(Funcionario $funcionario): RedirectResponse
     {
-        if ($funcionario->foto) {
-            \Illuminate\Support\Facades\Storage::disk('public')->delete($funcionario->foto);
-        }
         $funcionario->delete();
-        return redirect()->route('funcionarios.index')->with('success', 'Funcionário removido.');
+        return redirect()->route('funcionarios.index')->with('success', 'Funcionario removido.');
     }
 
     public function completarPerfil(): View

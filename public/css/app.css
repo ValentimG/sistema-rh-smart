@@ -313,3 +313,13 @@ body.dark .tab-btn.act { background: rgba(30,41,59,.8); color: #60a5fa; border-c
 body.dark .tab-panel { background: rgba(30,41,59,.8); border-color: rgba(255,255,255,.05); }
 body.dark .back-link { color: #64748b; }
 body.dark .back-link:hover { color: #60a5fa; }
+
+input[readonly] {
+    background: var(--gray-50);
+    cursor: not-allowed;
+    color: var(--gray-600);
+}
+body.dark input[readonly] {
+    background: rgba(30,41,59,.6);
+    color: #94a3b8;
+}

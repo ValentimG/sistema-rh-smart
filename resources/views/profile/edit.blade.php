@@ -39,10 +39,10 @@
                         <div class="form-group"><label class="form-label">E-mail</label><input type="email" name="email" class="form-input" value="{{ old('email', auth()->user()->email) }}"></div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label class="form-label">CPF</label><input type="text" class="form-input" value="{{ $f->cpfFormatado }}" readonly style="background:var(--gray-50);cursor:not-allowed"></div>
-                        <div class="form-group"><label class="form-label">Telefone</label><input type="text" class="form-input" value="{{ $f->telefone ?? '—' }}" readonly style="background:var(--gray-50);cursor:not-allowed"></div>
+                        <div class="form-group"><label class="form-label">CPF</label><input type="text" class="form-input readonly-input" value="{{ $f->cpfFormatado }}" readonly></div>
+                        <div class="form-group"><label class="form-label">Telefone</label><input type="text" class="form-input readonly-input" value="{{ $f->telefone ?? '—' }}" readonly></div>
                     </div>
-                    <div class="form-group"><label class="form-label">Endereco</label><input type="text" class="form-input" value="{{ $f->endereco }}" readonly style="background:var(--gray-50);cursor:not-allowed"></div>
+                    <div class="form-group"><label class="form-label">Endereco</label><input type="text" class="form-input readonly-input" value="{{ $f->endereco }}" readonly></div>
                     <button type="submit" class="btn btn-primary">Salvar</button>
                 </form>
             </div>

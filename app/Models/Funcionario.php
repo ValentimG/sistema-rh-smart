@@ -26,7 +26,6 @@ class Funcionario extends Model
         'sexo',
         'estado_civil',
         'telefone',
-        'foto',
         'tipo_contrato',
         'beneficios',
         'bonificacoes',
@@ -129,13 +128,5 @@ class Funcionario extends Model
             'terceirizado' => 'Terceirizado',
             default => $this->tipo_contrato ?? '—',
         };
-    }
-
-    public function getFotoUrlAttribute(): string
-    {
-        if ($this->foto && file_exists(public_path('storage/' . $this->foto))) {
-            return asset('storage/' . $this->foto);
-        }
-        return '';
     }
 }
