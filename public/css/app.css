@@ -285,3 +285,13 @@ body.dark .banco-hoje { color: #94a3b8; border-top-color: rgba(255,255,255,.06);
 
 body.dark .info-card { background: rgba(255,255,255,.03); }
 body.dark .info-card-value { color: #e2e8f0; }
+
+/* Ocultar texto padrao do input file */
+.file-upload-wrapper input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+    width: 0;
+}
+.file-upload-wrapper input[type="file"]::before {
+    content: '';
+    display: none;
+}

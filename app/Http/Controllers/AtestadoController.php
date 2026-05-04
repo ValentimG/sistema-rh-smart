@@ -57,10 +57,13 @@ class AtestadoController extends Controller
             'data_fim'       => ['required', 'date', 'after_or_equal:data_inicio'],
             'cobre_horas'    => ['nullable', 'boolean'],
             'observacao'     => ['nullable', 'string', 'max:1000'],
-            'arquivo'        => ['nullable', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:2048'],
+            'arquivo'        => ['required', 'file', 'mimes:pdf,jpg,jpeg,png', 'max:2048'],
         ], [
             'data_inicio.before_or_equal' => 'A data de início não pode ser futura.',
             'data_fim.after_or_equal' => 'A data final deve ser igual ou posterior à data de início.',
+            'arquivo.required' => 'E obrigatorio anexar o arquivo do atestado.',
+            'arquivo.mimes' => 'O arquivo deve ser PDF, JPG ou PNG.',
+            'arquivo.max' => 'O arquivo deve ter no maximo 2MB.',
         ]);
 
         if (! $atual->isGestor()) {
@@ -80,7 +83,7 @@ class AtestadoController extends Controller
         Atestado::create($validated);
 
         return redirect()->route('atestados.index')
-            ->with('success', 'Atestado enviado com sucesso. Aguardando análise.');
+            ->with('success', 'Atestado enviado com sucesso. Aguardando analise.');
     }
 
     public function show(Atestado $atestado): View
