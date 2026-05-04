@@ -65,3 +65,6 @@ body.dark .detail-row dd { color: #e2e8f0; }
 body.dark .attachment-box { background: rgba(255,255,255,.03); color: #94a3b8; }
 body.dark .back-link { color: #64748b; }
 body.dark .back-link:hover { color: #60a5fa; }
+
+.detail-col:first-child { text-align: center; }
+.detail-avatar { margin: 0 auto 12px; }
